@@ -11,14 +11,12 @@ export default function StoreMapControls({
     <div className={controls}>
       <button
         aria-label="Zoom in"
-        className={`button button-primary`}
         onClick={zoom}
       >
         <span aria-hidden="true">+</span>
       </button>
       <button
         aria-label="Zoom out"
-        className="button button-primary"
         onClick={unzoom}
       >
         <span aria-hidden="true">-</span>

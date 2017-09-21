@@ -17,14 +17,25 @@
   padding: 5px;
   position: absolute;
   right: 6px;
-  width: 2.4em;
+  width: 3em;
 }
 
 .controls button {
+  background: #007dc6;
+  border: none;
+  color: white;
   display: block;
-  padding-left: 0;
-  padding-right: 0;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
   width: 100%;
+}
+.controls button:focus,
+.controls button:hover {
+  background: #3da1e0;
+}
+.controls button:active {
+  background: #0070b2;
 }
 .controls button:first-child {
   border-radius: 3px 3px 0 0;
