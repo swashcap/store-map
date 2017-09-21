@@ -2,16 +2,16 @@
 
 /* eslint-disable global-require */
 
-process.on('SIGINT', () => {
+process.on("SIGINT", () => {
   process.exit(0);
 });
 
-const electrodeConfippet = require('electrode-confippet');
-const support = require('electrode-archetype-react-app/support');
+const electrodeConfippet = require("electrode-confippet");
+const support = require("electrode-archetype-react-app/support");
 
 //
-const staticPathsDecor = require('electrode-static-paths');
-const startServer = config => require('electrode-server')(config, [staticPathsDecor()]);
+const staticPathsDecor = require("electrode-static-paths");
+const startServer = config => require("electrode-server")(config, [staticPathsDecor()]);
 //
 
 support.load().then(() => {
