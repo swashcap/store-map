@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { controls } from '../../styles/store-map.css';
+
 export default function StoreMapControls({
   unzoom,
   zoom
 }) {
   return (
-    <div className="store-map-controls">
+    <div className={controls}>
       <button
         aria-label="Zoom in"
-        className="button button-primary"
+        className={`button button-primary`}
         onClick={zoom}
       >
         <span aria-hidden="true">+</span>

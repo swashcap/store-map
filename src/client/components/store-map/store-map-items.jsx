@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import storeMap from '../../styles/store-map.css';
 
 const SCALE_FACTOR = 2;
 
@@ -11,7 +12,8 @@ export default function StoreMapItems({
 }) {
   return (
     <svg
-      className="store-map-items"
+      className={storeMap.items}
+      preserveAspectRatio="xMinYMin"
       viewBox={`0 0 ${width} ${height}`}
     >
       <title>2243 Items</title>
@@ -25,7 +27,7 @@ export default function StoreMapItems({
           index
         ) => (
           <g
-            className="store-map-items-item"
+            className={storeMap.item}
             key={id}
             transform={`translate(${x}, ${y})`}
           >

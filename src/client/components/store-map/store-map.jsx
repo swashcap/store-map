@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { container } from '../../styles/store-map.css';
+
 import StoreMapControls from './store-map-controls';
 import StoreMapGraphic from './store-map-graphic';
 
@@ -115,7 +117,7 @@ export default class StoreMap extends Component {
 
     return (
       <div
-        className="store-map"
+        className={container}
         ref={this.setRef}
       >
         <StoreMapGraphic

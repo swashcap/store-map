@@ -4,7 +4,8 @@ import Draggable from 'react-draggable';
 
 import StoreMapPOIs from './store-map-pois';
 import StoreMapItems from './store-map-items';
-import sampleMap from '../images/2243.svg';
+import sampleMap from '../../images/2243.svg';
+import storeMap from '../../styles/store-map.css';
 
 export default function StoreMapGraphic({
   bounds,
@@ -15,29 +16,39 @@ export default function StoreMapGraphic({
   scale
 }) {
   return (
-    <Draggable
-      bounds={bounds}
-      defaultClassName="store-map-graphic"
-      defaultClassNameDragged="store-map-graphic-dragged"
-      defaultClassNameDragging="store-map-graphic-dragging"
-      defaultPosition={defaultPosition}
-    >
-      <div className="store-map-graphic-draggable">
-        <div
-          className="store-map-graphic-scaler"
-          style={{ transform: `scale(${scale})` }}
-        >
-          <img src={sampleMap} />
-          <StoreMapPOIs hideDescriptions={hideDescriptions} pois={pois} />
-          <StoreMapItems
-            height={602}
-            items={items}
-            scale={scale}
-            width={898}
-          />
+    <div className={storeMap.graphic}>
+      <Draggable
+        bounds={bounds}
+        defaultClassName={storeMap['graphic-draggable']}
+        defaultClassNameDragged="draggable-dragged"
+        defaultClassNameDragging="draggable-dragging"
+        defaultPosition={defaultPosition}
+      >
+        <div>
+          <div
+            className={storeMap['graphic-scaler']}
+            style={{ transform: `scale(${scale})` }}
+          >
+            <img
+              className={storeMap.map}
+              src={sampleMap}
+            />
+            <StoreMapPOIs
+              height={602}
+              hideDescriptions={hideDescriptions}
+              pois={pois}
+              width={898}
+            />
+            <StoreMapItems
+              height={602}
+              items={items}
+              scale={scale}
+              width={898}
+            />
+          </div>
         </div>
-      </div>
-    </Draggable>
+      </Draggable>
+    </div>
   );
 }
 

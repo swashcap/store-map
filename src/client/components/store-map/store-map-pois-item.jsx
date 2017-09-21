@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+
+import storeMap from '../../styles/store-map.css';
 
 export default function StoreMapPOIsItem({
   coordinates: { x, y },
@@ -8,10 +9,9 @@ export default function StoreMapPOIsItem({
   description,
   icon
 }) {
-  const className = classnames('store-map-pois-item-description', {
-    'is-hidden': hideDescription
-  });
-
+  const style = hideDescription ?
+    { opacity: 0 } :
+    undefined;
   let displayIcon;
 
   if (icon === 'mcdonalds') {
@@ -28,12 +28,12 @@ export default function StoreMapPOIsItem({
 
   return (
     <g
-      className="store-map-pois-item"
+      className={storeMap.poi}
       transform={`translate(${x}, ${y})`}
     >
-      <text className="store-map-pois-item-icon">{displayIcon}</text>
+      <text>{displayIcon}</text>
       <text
-        className={className}
+        style={style}
         x="20"
       >
         {description}

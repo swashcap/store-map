@@ -1,65 +1,47 @@
-.container {
-  max-width: 800px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
-.header {
-  margin-top: 6rem;
-  text-align: center;
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
 }
-.docs-header {
-  text-transform: uppercase;
-  font-size: 1.4rem;
-  letter-spacing: .2rem;
-  font-weight: 600;
+
+.root {
+  height: 100vh;
+  width: 100%;
 }
-.docs-section {
-  border-top: 1px solid #eee;
-  padding: 4rem 0;
+
+.nav {
+  background: black;
+  color: white;
+  left: 0;
+  line-height: 5rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav li {
   margin-bottom: 0;
 }
-.docs-example .row, .docs-example.row, .docs-example {
-  margin-bottom: 0;
-}
-.docs-example h1,
-.docs-example h2,
-.docs-example h3,
-.docs-example h4,
-.docs-example h5,
-.docs-example h6 {
-  margin-bottom: 1rem;
-}
-.heading-font-size {
-  font-size: 1.2rem;
-  color: #999;
-  letter-spacing: normal;
+.nav a {
+  color: inherit;
+  display: block;
+  line-height: inherit;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
-/* Larger than phone */
-@media (min-width: 550px) {
-  .header {
-    margin-top: 18rem;
-  }
-
-  .docs-section {
-    padding: 6rem 0;
-  }
-}
-
-/* Larger than tablet */
-@media (min-width: 750px) {
-  /* Re-overiding the width 100% declaration to match size of % based container */
-  .container {
-    width: 80%;
-  }
-}
-
-img {
-  vertical-align: text-bottom;
-}
-
-.demoAppContainer h2 {
-  margin: 50px 0;
-  text-align: center;
+.main {
+  height: 100%;
+  padding-top: 5rem;
+  width: 100%;
 }
