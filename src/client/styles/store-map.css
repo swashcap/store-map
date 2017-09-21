@@ -106,10 +106,18 @@
   width: 100%;
 }
 
-.poi text {
-  fill: #222222;
-  font-size: 14px;
-  font-weight: 700;
+.poi text:first-child {
+  alignment-baseline: middle;
+  text-anchor: middle;
+}
+
+.poi text:nth-child(2) {
+  alignment-baseline: middle;
+  fill: #222;
+  font-size: 10px;
+  font-weight: 400;
+  text-anchor: middle;
+  text-shadow: .5px .5px 0 white;
   transition-duration: 150ms;
   transition-property: opacity;
 }

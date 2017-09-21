@@ -34,7 +34,7 @@ export default function StoreMapPOIsItem({
       <text>{displayIcon}</text>
       <text
         style={style}
-        x="20"
+        y="20"
       >
         {description}
       </text>

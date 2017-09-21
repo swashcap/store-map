@@ -138,7 +138,7 @@ export default class StoreMap extends Component {
 
 StoreMap.defaultProps = {
   boundaryPadding: 20,
-  initialScale: 1,
+  initialScale: 2,
   labelsThreshold: 1.5,
   scaleFactor: 0.4
 };
