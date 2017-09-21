@@ -19,7 +19,7 @@ import { Link } from 'react-router';
 import '../styles/normalize.css';
 import skeleton from '../styles/skeleton.css';
 import custom from '../styles/custom.css';
-import StoreMap from './store-map/store-map.jsx';
+import StoreMap from './store-map/store-map';
 
 export default () =>
   <div className={custom.root}>
