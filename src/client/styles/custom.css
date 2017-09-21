@@ -6,12 +6,16 @@
 html,
 body {
   height: 100%;
-  overflow: hidden;
   width: 100%;
 }
+body {
+  overflow: hidden;
+  position: fixed;
+}
 
+:global(.js-content),
 .root {
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 
@@ -23,6 +27,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 100;
 }
 .nav ul {
   list-style: none;
