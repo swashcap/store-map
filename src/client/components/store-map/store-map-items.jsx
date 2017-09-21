@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import storeMap from '../../styles/store-map.css';
 
-const SCALE_FACTOR = 2;
+const SCALE_FACTOR = 1.5;
 
 export default function StoreMapItems({
   height,
