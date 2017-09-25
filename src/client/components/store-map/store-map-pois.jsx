@@ -36,6 +36,6 @@ StoreMapPOIs.propTypes = {
   height: PropTypes.number.isRequired,
   hideDescriptions: PropTypes.bool.isRequired,
   pois: PropTypes.array.isRequired,
-  width: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired
 };
 

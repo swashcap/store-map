@@ -17,7 +17,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import '../styles/normalize.css';
-import skeleton from '../styles/skeleton.css';
+import skeleton from '../styles/skeleton.css'; // eslint-disable-line no-unused-vars
 import custom from '../styles/custom.css';
 import StoreMap from './store-map/store-map';
 

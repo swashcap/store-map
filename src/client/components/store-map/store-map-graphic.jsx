@@ -23,7 +23,7 @@ export default function StoreMapGraphic({
   return (
     <div className={storeMap.graphic}>
       <div style={translateStyle}>
-        <div className={storeMap["graphic-scaler"]} style={scaleStyle}>
+        <div className={storeMap['graphic-scaler']} style={scaleStyle}>
           <img
             className={storeMap.map}
             src={sampleMap}
@@ -62,7 +62,7 @@ StoreMapGraphic.propTypes = {
   pois: PropTypes.array.isRequired,
   position: PropTypes.shape({
     x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired
   }).isRequired,
   scale: PropTypes.number.isRequired
 };
