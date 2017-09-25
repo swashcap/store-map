@@ -7,7 +7,7 @@ import { container } from '../../styles/store-map.css';
 import StoreMapControls from './store-map-controls';
 import StoreMapGraphic from './store-map-graphic';
 
-const items = [{
+const sampleItems = [{
   coordinates: {
     x: 555,
     y: 333
@@ -22,7 +22,7 @@ const items = [{
   description: 'My Other Item',
   id: '41ace9'
 }];
-const pois = [{
+const samplePois = [{
   coordinates: {
     x: 328,
     y: 127
@@ -56,22 +56,43 @@ const pois = [{
   id: '815dab'
 }];
 
+/**
+ * Store map component.
+ *
+ * @extends React.Component
+ */
 export default class StoreMap extends Component {
+  /**
+   * Create a store component
+   *
+   * @param {Object} props Component's passed properties
+   * @param {Object} [props.initialPosition] Initial horizontal and vertical
+   * position of the map
+   * @param {number} [props.initialScale=1] Initial scale of the map
+   * @param {number} [props.labelThreshold=1.5] Labels appear when the zoom
+   * level is greater than threshold
+   * @param {number} [props.maxScale=4] Maximum scale
+   * @param {number} [props.minScale=0.5] Minimum scale
+   * @param {number} [pinchFactor=0.1] Factor to adjust scale during punch/pull
+   * @param {number} [props.scaleFactor=0.4] Scale factor to increase/decrease
+   * map's scale when zoom buttons are clicked
+   */
   constructor(props) {
     super(props);
 
     this.state = {
-      items,
-      pois,
+      items: sampleItems,
+      pois: samplePois,
       position: props.initialPosition,
       scale: props.initialScale
     };
 
-    this.onPan = this.onPan.bind(this);
-    this.onPanStart = this.onPanStart.bind(this);
-    this.onPinch = this.onPinch.bind(this);
-    this.onPinchStart = this.onPinchStart.bind(this);
-    this.zoom = this.zoom.bind(this);
+    this.handleOnPan = this.handleOnPan.bind(this);
+    this.handleOnPanStart = this.handleOnPanStart.bind(this);
+    this.handleOnPinch = this.handleOnPinch.bind(this);
+    this.handleOnPinchStart = this.handleOnPinchStart.bind(this);
+    this.zoomIn = this.zoomIn.bind(this);
+    this.zoomOut = this.zoomOut.bind(this);
   }
 
   /**
@@ -79,11 +100,12 @@ export default class StoreMap extends Component {
    *
    * {@link http://hammerjs.github.io/api/#event-object}
    *
-   * @param {Event} event
-   * @param {number} event.deltaX
-   * @param {number} event.deltaY
+   * @param {Event} event Hammer.js-wrapped DOM event
+   * @param {number} event.deltaX Hammer.js calculated change in X
+   * @param {number} event.deltaY Hammer.js calculated change in Y
+   * @returns {undefined}
    */
-  onPan(event) {
+  handleOnPan(event) {
     this.setState({
       items: this.state.items,
       pois: this.state.pois,
@@ -94,11 +116,13 @@ export default class StoreMap extends Component {
       scale: this.state.scale
     });
   }
-  
+
   /**
    * Set initial coordinates on pan start.
+   *
+   * @returns {undefined}
    */
-  onPanStart() {
+  handleOnPanStart() {
     this._initialX = this.state.position.x;
     this._initialY = this.state.position.y;
   }
@@ -106,27 +130,34 @@ export default class StoreMap extends Component {
   /**
    * {@link http://hammerjs.github.io/api/#event-object}
    *
-   * @param {Event} event
-   * @param {number} event.scale
+   * @param {Event} event Hammer.js-wrapped DOM event
+   * @param {number} event.scale Hammer.js calculated scale change
+   *
+   * @returns {undefined}
    */
-  onPinch(event) {
-    this.zoom(this.state.scale + 0.1 * (event.scale - 1));
+  handleOnPinch(event) {
+    this.setScale(
+      this.state.scale + this.props.pinchFactor * (event.scale - 1)
+    );
   }
 
   /**
    * Set initial scale on pinch start.
+   *
+   * @returns {undefined}
    */
-  onPinchStart() {
+  handleOnPinchStart() {
     this._initialScale = this.state.scale;
   }
 
   /**
-   * Zoom/un-zoom scale.
+   * Conditionally set the `scale` state.
    *
-   * @param {number}
+   * @param {number} scale New scale to set
+   * @returns {undefined}
    */
-  zoom(scale) {
-    if (scale < 4 && scale > 0.66) {
+  setScale(scale) {
+    if (scale < this.props.maxScale && scale > this.props.minScale) {
       this.setState({
         items: this.state.items,
         pois: this.state.pois,
@@ -136,8 +167,25 @@ export default class StoreMap extends Component {
     }
   }
 
+  /**
+   * Increase the scale.
+   *
+   * @returns {undefined}
+   */
+  zoomIn() {
+    this.setScale(this.state.scale - this.props.scaleFactor);
+  }
+
+  /**
+   * Decrease the scale.
+   *
+   * @returns {undefined}
+   */
+  zoomOut() {
+    this.setScale(this.state.scale - this.props.scaleFactor);
+  }
+
   render() {
-    const { labelsThreshold, scaleFactor } = this.props;
     const { items, pois, position, scale } = this.state;
 
     return (
@@ -146,10 +194,10 @@ export default class StoreMap extends Component {
         ref={this.setRef}
       >
         <Hammer
-          onPan={this.onPan}
-          onPanStart={this.onPanStart}
-          onPinch={this.onPinch}
-          onPinchStart={this.onPinchStart}
+          onPan={this.handleOnPan}
+          onPanStart={this.handleOnPanStart}
+          onPinch={this.handleOnPinch}
+          onPinchStart={this.handleOnPinchStart}
           options={{
             recognizers: {
               pinch: {
@@ -159,7 +207,7 @@ export default class StoreMap extends Component {
           }}
         >
           <StoreMapGraphic
-            hideDescriptions={scale < labelsThreshold}
+            hideDescriptions={scale < this.props.labelsThreshold}
             items={items}
             pois={pois}
             position={position}
@@ -167,8 +215,8 @@ export default class StoreMap extends Component {
           />
         </Hammer>
         <StoreMapControls
-          unzoom={() => this.zoom(scale - scaleFactor)}
-          zoom={() => this.zoom(scale + scaleFactor)}
+          unzoom={this.zoomOut}
+          zoom={this.zoomIn}
         />
       </div>
     );
@@ -176,26 +224,30 @@ export default class StoreMap extends Component {
 }
 
 StoreMap.defaultProps = {
-  boundaryPadding: 20,
   initialPosition: {
     x: 0,
     y: 0
   },
   initialScale: 1,
   labelsThreshold: 1.5,
+  maxScale: 4,
+  minScale: 0.5,
+  pinchFactor: 0.1,
   scaleFactor: 0.4
 };
 
 StoreMap.displayName = 'StoreMap';
 
 StoreMap.propTypes = {
-  boundaryPadding: PropTypes.number,
   initialPosition: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
   }),
   initialScale: PropTypes.number,
   labelsThreshold: PropTypes.number,
+  maxScale: PropTypes.number,
+  minScale: PropTypes.number,
+  pinchFactor: PropTypes.number,
   scaleFactor: PropTypes.number
 };
 
