@@ -23,7 +23,7 @@ export default function StoreMapGraphic({
   return (
     <div className={storeMap.graphic}>
       <div style={translateStyle}>
-        <div style={scaleStyle}>
+        <div className={storeMap["graphic-scaler"]} style={scaleStyle}>
           <img
             className={storeMap.map}
             src={sampleMap}

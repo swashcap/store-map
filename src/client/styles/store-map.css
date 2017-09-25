@@ -5,7 +5,6 @@
   width: 100%;
 }
 
-
 /**
  * Controls
  */
@@ -54,29 +53,13 @@
  * Graphic.
  */
 .graphic {
-}
-
-.graphic-draggable {
   cursor: move;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 100%;
 }
 
 .graphic-scaler {
   transition-duration: 150ms;
   transition-property: transform;
   transition-timing-function: linear;
-}
-
-.graphic .scaler > * {
-  height: auto;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
 }
 
 /**
